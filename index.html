@@ -2,8 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Eastern Route Hotel</title>
 
   <style>
@@ -15,11 +18,74 @@
       font-family:Arial,sans-serif;
     }
 
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       background:white;
       color:#222;
       line-height:1.6;
     }
+
+    /* NAVBAR */
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      padding:20px 10%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(0,0,0,0.7);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+    }
+
+    .logo{
+      color:white;
+      font-size:28px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:orange;
+    }
+
+    /* HAMBURGER */
+
+    .hamburger{
+      display:none;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+    }
+
+    .hamburger span{
+      width:28px;
+      height:3px;
+      background:white;
+      border-radius:10px;
+      transition:0.3s;
+    }
+
+    /* HERO */
 
     .hero{
       height:100vh;
@@ -62,6 +128,8 @@
       font-size:16px;
       margin:10px;
       transition:0.3s;
+      text-decoration:none;
+      display:inline-block;
     }
 
     .btn:hover{
@@ -202,6 +270,8 @@
       color:#999;
     }
 
+    /* MOBILE */
+
     @media(max-width:768px){
 
       .hero h1{
@@ -220,6 +290,26 @@
         font-size:32px;
       }
 
+      .nav-links{
+        position:absolute;
+        top:80px;
+        right:10%;
+        background:#111;
+        flex-direction:column;
+        width:230px;
+        padding:25px;
+        border-radius:15px;
+        display:none;
+      }
+
+      .nav-links.active{
+        display:flex;
+      }
+
+      .hamburger{
+        display:flex;
+      }
+
     }
 
   </style>
@@ -228,9 +318,43 @@
 
 <body>
 
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+
+    <div class="logo">
+      Eastern Route
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+
+      <li><a href="#home">Home</a></li>
+
+      <li><a href="#rooms">Rooms</a></li>
+
+      <li><a href="#about">About</a></li>
+
+      <li><a href="#booking">Booking</a></li>
+
+      <li><a href="#contact">Contact</a></li>
+
+    </ul>
+
+    <!-- HAMBURGER -->
+
+    <div class="hamburger" id="hamburger">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+  </nav>
+
   <!-- HERO SECTION -->
 
-  <section class="hero">
+  <section class="hero" id="home">
 
     <div class="overlay"></div>
 
@@ -238,20 +362,25 @@
 
       <h1>Eastern Route Hotel</h1>
 
-      <p>Luxury Comfort • Elegant Rooms • Exceptional Hospitality</p>
+      <p>
+        Luxury Comfort • Elegant Rooms • Exceptional Hospitality
+      </p>
 
-      <button class="btn primary">Book a Room</button>
+      <a href="#booking" class="btn primary">
+        Book a Room
+      </a>
 
-      <button class="btn secondary">View Rooms</button>
+      <a href="#rooms" class="btn secondary">
+        View Rooms
+      </a>
 
     </div>
 
   </section>
 
+  <!-- ROOMS -->
 
-  <!-- ROOMS SECTION -->
-
-  <section>
+  <section id="rooms">
 
     <div class="title">
       <h2>Our Rooms</h2>
@@ -305,10 +434,9 @@
 
   </section>
 
+  <!-- ABOUT -->
 
-  <!-- ABOUT SECTION -->
-
-  <section>
+  <section id="about">
 
     <div class="title">
       <h2>About Us</h2>
@@ -326,15 +454,14 @@
 
         <p>
           Eastern Route Hotel offers a comfortable and elegant stay in Kampala
-          with beautifully designed rooms, exceptional service, and a relaxing
-          atmosphere for business and leisure travelers.
+          with beautifully designed rooms and exceptional service.
         </p>
 
         <br>
 
         <p>
-          We are dedicated to providing guests with secure accommodation,
-          luxury comfort, and memorable hospitality experiences.
+          We are dedicated to providing guests with secure accommodation
+          and memorable hospitality experiences.
         </p>
 
         <br>
@@ -349,8 +476,7 @@
 
   </section>
 
-
-  <!-- TESTIMONIALS SECTION -->
+  <!-- TESTIMONIALS -->
 
   <section class="testimonial-section">
 
@@ -363,8 +489,7 @@
       <div class="testimonial-card">
 
         <p>
-          “Excellent hospitality, clean rooms, and a peaceful environment.
-          Highly recommended for anyone visiting Kampala.”
+          “Excellent hospitality and peaceful environment.”
         </p>
 
         <br>
@@ -376,8 +501,7 @@
       <div class="testimonial-card">
 
         <p>
-          “Beautiful rooms, friendly staff, and very professional service.
-          I enjoyed my stay.”
+          “Beautiful rooms and professional service.”
         </p>
 
         <br>
@@ -389,7 +513,7 @@
       <div class="testimonial-card">
 
         <p>
-          “Amazing atmosphere and comfortable rooms. Definitely worth it.”
+          “Amazing atmosphere and comfortable rooms.”
         </p>
 
         <br>
@@ -402,10 +526,9 @@
 
   </section>
 
+  <!-- BOOKING -->
 
-  <!-- BOOKING SECTION -->
-
-  <section class="booking-section">
+  <section class="booking-section" id="booking">
 
     <div class="title">
       <h2>Book Your Stay</h2>
@@ -423,16 +546,17 @@
 
       <input type="date">
 
-      <button class="btn primary">Book Now</button>
+      <button class="btn primary">
+        Book Now
+      </button>
 
     </form>
 
   </section>
 
-
   <!-- FOOTER -->
 
-  <footer>
+  <footer id="contact">
 
     <div class="footer-container">
 
@@ -484,6 +608,21 @@
 
   </footer>
 
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    const hamburger = document.getElementById('hamburger');
+
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+
+      navLinks.classList.toggle('active');
+
+    });
+
+  </script>
+
 </body>
 </html>
-
