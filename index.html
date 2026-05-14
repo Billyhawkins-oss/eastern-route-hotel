@@ -2,1115 +2,901 @@
 <html lang="en">
 <head>
 
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Eastern Route Hotel | Luxury & Comfort</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      scroll-behavior:smooth;
-    }
-
-    :root{
-      --primary:#d4a24c;
-      --dark:#0a0a0a;
-      --section:#141414;
-      --light:#ffffff;
-      --gray:#c5c5c5;
-    }
-
-    body{
-      font-family:'Poppins',sans-serif;
-      background:var(--dark);
-      color:white;
-      overflow-x:hidden;
-      transition:0.4s;
-    }
-
-    /* LIGHT MODE */
-
-    body.light-mode{
-      background:#f4f4f4;
-      color:#111;
-    }
-
-    body.light-mode .navbar{
-      background:rgba(255,255,255,0.8);
-    }
-
-    body.light-mode .nav-links a{
-      color:#111;
-    }
-
-    body.light-mode .room,
-    body.light-mode .feature,
-    body.light-mode .testimonial,
-    body.light-mode .booking-bar{
-      background:white;
-      color:#111;
-    }
-
-    body.light-mode .room-content p,
-    body.light-mode .feature p,
-    body.light-mode .testimonial p,
-    body.light-mode .title p,
-    body.light-mode .about-content p{
-      color:#555;
-    }
-
-    body.light-mode .booking-bar input,
-    body.light-mode .booking-bar select{
-      background:#f1f1f1;
-      color:#111;
-    }
-
-    /* NAVBAR */
-
-    .navbar{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      padding:22px 8%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(0,0,0,0.2);
-      backdrop-filter:blur(10px);
-      z-index:1000;
-      transition:0.4s;
-    }
-
-    .navbar.scrolled{
-      background:rgba(0,0,0,0.92);
-    }
-
-    body.light-mode .navbar.scrolled{
-      background:rgba(255,255,255,0.95);
-    }
-
-    .logo{
-      font-size:30px;
-      font-weight:800;
-      color:var(--primary);
-      letter-spacing:1px;
-    }
-
-    .nav-links{
-      display:flex;
-      gap:35px;
-      list-style:none;
-      align-items:center;
-    }
-
-    .nav-links a{
-      text-decoration:none;
-      color:white;
-      font-size:15px;
-      font-weight:500;
-      transition:0.3s;
-      position:relative;
-    }
-
-    .nav-links a::after{
-      content:'';
-      width:0;
-      height:2px;
-      background:var(--primary);
-      position:absolute;
-      left:0;
-      bottom:-6px;
-      transition:0.3s;
-    }
-
-    .nav-links a:hover::after{
-      width:100%;
-    }
-
-    .nav-links a:hover{
-      color:var(--primary);
-    }
-
-    /* THEME TOGGLE */
-
-    .theme-toggle{
-      width:58px;
-      height:30px;
-      background:#222;
-      border-radius:30px;
-      position:relative;
-      cursor:pointer;
-      margin-left:20px;
-      transition:0.3s;
-    }
-
-    .toggle-circle{
-      width:24px;
-      height:24px;
-      background:white;
-      border-radius:50%;
-      position:absolute;
-      top:3px;
-      left:4px;
-      transition:0.3s;
-    }
-
-    body.light-mode .toggle-circle{
-      transform:translateX(27px);
-      background:orange;
-    }
-
-    /* HAMBURGER */
-
-    .hamburger{
-      display:none;
-      flex-direction:column;
-      gap:5px;
-      cursor:pointer;
-    }
-
-    .hamburger span{
-      width:28px;
-      height:3px;
-      background:white;
-      border-radius:10px;
-    }
-
-    body.light-mode .hamburger span{
-      background:#111;
-    }
-
-    /* HERO */
-
-    .hero{
-      height:100vh;
-      position:relative;
-      display:flex;
-      align-items:center;
-      padding:0 8%;
-      overflow:hidden;
-    }
-
-    /* SLIDER */
-
-    .slider{
-      position:absolute;
-      inset:0;
-      z-index:0;
-    }
-
-    .slide{
-      position:absolute;
-      inset:0;
-      background-size:cover;
-      background-position:center;
-      opacity:0;
-      transition:opacity 1.5s ease;
-    }
-
-    .slide.active{
-      opacity:1;
-    }
-
-    .overlay{
-      position:absolute;
-      inset:0;
-      background:rgba(0,0,0,0.65);
-      z-index:1;
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
-      max-width:760px;
-      animation:fadeUp 1s ease;
-    }
-
-    .hero-content h1{
-      font-size:78px;
-      line-height:1.05;
-      margin-bottom:25px;
-      font-weight:800;
-    }
-
-    .hero-content h1 span{
-      color:var(--primary);
-    }
-
-    .hero-content p{
-      font-size:18px;
-      line-height:1.9;
-      color:#ddd;
-      margin-bottom:40px;
-      max-width:650px;
-    }
-
-    .hero-buttons{
-      display:flex;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      padding:16px 34px;
-      border-radius:50px;
-      text-decoration:none;
-      font-weight:600;
-      transition:0.4s;
-      display:inline-block;
-    }
-
-    .primary{
-      background:var(--primary);
-      color:black;
-    }
-
-    .primary:hover{
-      transform:translateY(-5px);
-      box-shadow:0 15px 40px rgba(212,162,76,0.3);
-    }
-
-    .secondary{
-      border:1px solid rgba(255,255,255,0.4);
-      color:white;
-    }
-
-    .secondary:hover{
-      background:white;
-      color:black;
-    }
-
-    /* BOOKING BAR */
-
-    .booking-bar{
-      width:84%;
-      margin:auto;
-      margin-top:-60px;
-      background:#151515;
-      padding:30px;
-      border-radius:24px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:20px;
-      position:relative;
-      z-index:5;
-      box-shadow:0 25px 60px rgba(0,0,0,0.4);
-      transition:0.4s;
-    }
-
-    .booking-bar input,
-    .booking-bar select{
-      width:100%;
-      padding:15px;
-      border:none;
-      border-radius:12px;
-      background:#1f1f1f;
-      color:white;
-      outline:none;
-      font-family:'Poppins',sans-serif;
-    }
-
-    .booking-bar button{
-      border:none;
-      border-radius:12px;
-      background:var(--primary);
-      color:black;
-      font-weight:700;
-      cursor:pointer;
-      transition:0.3s;
-    }
-
-    /* SECTION */
-
-    section{
-      padding:110px 8%;
-    }
-
-    .title{
-      text-align:center;
-      margin-bottom:70px;
-    }
-
-    .title h2{
-      font-size:50px;
-      margin-bottom:15px;
-    }
-
-    .title p{
-      max-width:700px;
-      margin:auto;
-      color:var(--gray);
-      line-height:1.8;
-    }
-
-    /* ROOMS */
-
-    .rooms{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:30px;
-    }
-
-    .room{
-      background:var(--section);
-      border-radius:25px;
-      overflow:hidden;
-      transition:0.4s;
-    }
-
-    .room:hover{
-      transform:translateY(-10px);
-    }
-
-    .room img{
-      width:100%;
-      height:260px;
-      object-fit:cover;
-    }
-
-    .room-content{
-      padding:30px;
-    }
-
-    .room-content h3{
-      margin-bottom:12px;
-      font-size:28px;
-    }
-
-    .room-content p{
-      color:var(--gray);
-      line-height:1.8;
-    }
-
-    .price{
-      color:var(--primary);
-      font-size:22px;
-      font-weight:700;
-      margin-top:20px;
-    }
-
-    /* FEATURES */
-
-    .features{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:30px;
-    }
-
-    .feature{
-      background:var(--section);
-      padding:40px;
-      border-radius:24px;
-      transition:0.4s;
-    }
-
-    .feature:hover{
-      transform:translateY(-10px);
-    }
-
-    .feature h3{
-      color:var(--primary);
-      margin-bottom:15px;
-      font-size:24px;
-    }
-
-    .feature p{
-      color:var(--gray);
-      line-height:1.8;
-    }
-
-    /* ABOUT */
-
-    .about{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:60px;
-      align-items:center;
-    }
-
-    .about img{
-      width:100%;
-      height:500px;
-      object-fit:cover;
-      border-radius:25px;
-    }
-
-    .about-content h2{
-      font-size:52px;
-      margin-bottom:25px;
-    }
-
-    .about-content p{
-      color:var(--gray);
-      line-height:1.9;
-      margin-bottom:20px;
-    }
-
-    /* TESTIMONIALS */
-
-    .testimonials{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:30px;
-    }
-
-    .testimonial{
-      background:var(--section);
-      padding:35px;
-      border-radius:24px;
-      transition:0.3s;
-    }
-
-    .testimonial:hover{
-      transform:translateY(-8px);
-    }
-
-    .testimonial p{
-      color:var(--gray);
-      line-height:1.9;
-      margin-bottom:20px;
-    }
-
-    .testimonial h4{
-      color:var(--primary);
-    }
-
-    /* CTA */
-
-    .cta{
-      background:
-      linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.75)),
-      url('https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=1600&auto=format&fit=crop');
-      background-size:cover;
-      background-position:center;
-      padding:100px 40px;
-      border-radius:30px;
-      text-align:center;
-    }
-
-    .cta h2{
-      font-size:52px;
-      margin-bottom:20px;
-    }
-
-    .cta p{
-      max-width:700px;
-      margin:auto;
-      color:#ddd;
-      line-height:1.9;
-      margin-bottom:35px;
-    }
-
-    /* FOOTER */
-
-    footer{
-      background:black;
-      padding:70px 8% 40px;
-    }
-
-    .footer-container{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:40px;
-    }
-
-    .footer-column h3{
-      margin-bottom:20px;
-      color:var(--primary);
-    }
-
-    .footer-column p{
-      color:#bbb;
-      margin-bottom:10px;
-      line-height:1.8;
-    }
-
-    .footer-bottom{
-      text-align:center;
-      margin-top:50px;
-      padding-top:20px;
-      border-top:1px solid #222;
-      color:#888;
-    }
-
-    /* ANIMATION */
-
-    @keyframes fadeUp{
-
-      from{
-        opacity:0;
-        transform:translateY(40px);
-      }
-
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-
-    }
-
-    /* MOBILE */
-
-    @media(max-width:900px){
-
-      .hero-content h1{
-        font-size:52px;
-      }
-
-      .title h2,
-      .about-content h2,
-      .cta h2{
-        font-size:38px;
-      }
-
-      .nav-links{
-        position:absolute;
-        top:90px;
-        right:8%;
-        background:#111;
-        width:240px;
-        padding:25px;
-        border-radius:20px;
-        flex-direction:column;
-        display:none;
-      }
-
-      .nav-links.active{
-        display:flex;
-      }
-
-      .hamburger{
-        display:flex;
-      }
-
-    }
-
-    @media(max-width:600px){
-
-      .hero-content h1{
-        font-size:40px;
-      }
-
-      .hero-content p{
-        font-size:16px;
-      }
-
-      section{
-        padding:90px 6%;
-      }
-
-      .booking-bar{
-        width:92%;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eastern Route Hotel | Luxury & Booking</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+:root{
+  --primary:#d4a24c;
+  --dark:#0a0a0a;
+  --section:#141414;
+  --gray:#c5c5c5;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--dark);
+  color:white;
+  overflow-x:hidden;
+  transition:0.4s;
+}
+
+/* LIGHT MODE */
+
+body.light-mode{
+  background:#f4f4f4;
+  color:#111;
+}
+
+body.light-mode .navbar{
+  background:rgba(255,255,255,0.92);
+}
+
+body.light-mode .room,
+body.light-mode .feature,
+body.light-mode .booking-container,
+body.light-mode .summary,
+body.light-mode .room-status{
+  background:white;
+  color:#111;
+}
+
+body.light-mode .room-content p,
+body.light-mode .feature p,
+body.light-mode .summary p{
+  color:#555;
+}
+
+body.light-mode input,
+body.light-mode select,
+body.light-mode textarea{
+  background:#f1f1f1;
+  color:#111;
+}
+
+/* NAVBAR */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:22px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+.navbar.scrolled{
+  background:rgba(0,0,0,0.92);
+}
+
+.logo{
+  font-size:30px;
+  font-weight:800;
+  color:var(--primary);
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+  list-style:none;
+  align-items:center;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:var(--primary);
+}
+
+/* THEME TOGGLE */
+
+.theme-toggle{
+  width:58px;
+  height:30px;
+  background:#222;
+  border-radius:30px;
+  position:relative;
+  cursor:pointer;
+}
+
+.toggle-circle{
+  width:24px;
+  height:24px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  top:3px;
+  left:4px;
+  transition:0.3s;
+}
+
+body.light-mode .toggle-circle{
+  transform:translateX(27px);
+  background:orange;
+}
+
+/* HERO */
+
+.hero{
+  height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  padding:0 8%;
+  overflow:hidden;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:1.5s;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:760px;
+}
+
+.rating-badge{
+  display:inline-block;
+  padding:12px 22px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.12);
+  margin-bottom:25px;
+}
+
+.hero-content h1{
+  font-size:78px;
+  line-height:1.05;
+  margin-bottom:25px;
+}
+
+.hero-content h1 span{
+  color:var(--primary);
+}
+
+.hero-content p{
+  color:#ddd;
+  line-height:1.9;
+  margin-bottom:35px;
+  max-width:650px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:16px 34px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.4s;
+  display:inline-block;
+}
+
+.primary{
+  background:var(--primary);
+  color:black;
+}
+
+.secondary{
+  border:1px solid rgba(255,255,255,0.5);
+  color:white;
+}
+
+.btn:hover{
+  transform:translateY(-5px);
+}
+
+/* SECTION */
+
+section{
+  padding:110px 8%;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:70px;
+}
+
+.title h2{
+  font-size:50px;
+  margin-bottom:15px;
+}
+
+.title p{
+  color:var(--gray);
+  max-width:700px;
+  margin:auto;
+}
+
+/* ROOMS */
+
+.rooms{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.room{
+  background:var(--section);
+  border-radius:25px;
+  overflow:hidden;
+  transition:0.4s;
+}
+
+.room:hover{
+  transform:translateY(-10px);
+}
+
+.room img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+}
+
+.room-content{
+  padding:30px;
+}
+
+.room-content p{
+  color:var(--gray);
+  margin-top:12px;
+}
+
+.price{
+  color:var(--primary);
+  margin-top:20px;
+  font-size:22px;
+  font-weight:700;
+}
+
+.limited{
+  margin-top:10px;
+  color:#ffb84d;
+}
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.feature{
+  background:var(--section);
+  padding:40px;
+  border-radius:24px;
+  transition:0.4s;
+}
+
+.feature:hover{
+  transform:translateY(-10px);
+}
+
+.feature h3{
+  color:var(--primary);
+  margin-bottom:15px;
+}
+
+.feature p{
+  color:var(--gray);
+  line-height:1.8;
+}
+
+/* BOOKING */
+
+.booking-section{
+  background:#101010;
+}
+
+.booking-container{
+  max-width:1100px;
+  margin:auto;
+  background:#141414;
+  padding:40px;
+  border-radius:30px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:14px;
+  background:#1f1f1f;
+  color:white;
+  outline:none;
+  font-family:'Poppins',sans-serif;
+}
+
+textarea{
+  height:130px;
+  resize:none;
+}
+
+.booking-btn{
+  width:100%;
+  margin-top:20px;
+  padding:18px;
+  border:none;
+  border-radius:14px;
+  background:var(--primary);
+  color:black;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.summary{
+  background:#1a1a1a;
+  padding:25px;
+  border-radius:20px;
+  margin-top:30px;
+}
+
+.summary h2{
+  margin-bottom:15px;
+}
+
+.summary p{
+  margin-top:10px;
+  color:#bbb;
+}
+
+/* AVAILABILITY */
+
+.availability{
+  margin-top:30px;
+}
+
+.room-status{
+  background:#1f1f1f;
+  padding:20px;
+  border-radius:18px;
+  margin-top:15px;
+  border-left:4px solid var(--primary);
+}
+
+/* WHATSAPP */
+
+.whatsapp-btn{
+  display:inline-block;
+  margin-top:20px;
+  background:#25D366;
+  color:white;
+  text-decoration:none;
+  padding:16px 24px;
+  border-radius:14px;
+}
+
+/* POPUP */
+
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  color:black;
+  padding:35px;
+  border-radius:20px;
+  display:none;
+  z-index:9999;
+  text-align:center;
+}
+
+/* FOOTER */
+
+footer{
+  background:black;
+  padding:60px 8%;
+  text-align:center;
+  color:#888;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-content h1{
+  font-size:52px;
+}
+
+.nav-links{
+  display:none;
+}
+
+}
+
+@media(max-width:600px){
+
+.hero-content h1{
+  font-size:40px;
+}
+
+section{
+  padding:90px 6%;
+}
+
+.booking-container{
+  padding:25px;
+}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+<!-- NAVBAR -->
 
-  <nav class="navbar" id="navbar">
+<nav class="navbar" id="navbar">
 
-    <div class="logo">
-      Eastern Route Hotel
-    </div>
+<div class="logo">
+Eastern Route Hotel
+</div>
 
-    <ul class="nav-links" id="navLinks">
+<ul class="nav-links">
 
-      <li><a href="#home">Home</a></li>
+<li><a href="#home">Home</a></li>
+<li><a href="#rooms">Rooms</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#booking">Booking</a></li>
 
-      <li><a href="#rooms">Rooms</a></li>
+<div class="theme-toggle" id="themeToggle">
+<div class="toggle-circle"></div>
+</div>
 
-      <li><a href="#services">Services</a></li>
+</ul>
 
-      <li><a href="#about">About</a></li>
+</nav>
 
-      <li><a href="#contact">Contact</a></li>
+<!-- HERO -->
 
-      <div class="theme-toggle" id="themeToggle">
+<section class="hero" id="home">
 
-        <div class="toggle-circle"></div>
+<div class="slider">
 
-      </div>
+<div class="slide active"
+style="background-image:url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1600&auto=format&fit=crop')"></div>
 
-    </ul>
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1600&auto=format&fit=crop')"></div>
 
-    <div class="hamburger" id="hamburger">
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=1600&auto=format&fit=crop')"></div>
 
-      <span></span>
-      <span></span>
-      <span></span>
+</div>
 
-    </div>
+<div class="overlay"></div>
 
-  </nav>
+<div class="hero-content">
 
-  <!-- HERO -->
+<div class="rating-badge">
+⭐ Premium Hospitality Experience
+</div>
 
-  <section class="hero" id="home">
+<h1>
+Experience Luxury
+& <span>Comfort</span>
+</h1>
 
-    <div class="slider">
+<p>
+Elegant accommodation and exceptional hospitality
+in Kampala Uganda.
+</p>
 
-      <div class="slide active"
-      style="background-image:url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1600&auto=format&fit=crop')">
-      </div>
+<div class="hero-buttons">
 
-      <div class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1600&auto=format&fit=crop')">
-      </div>
+<a href="#booking" class="btn primary">
+Book A Room
+</a>
 
-      <div class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=1600&auto=format&fit=crop')">
-      </div>
+<a href="#rooms" class="btn secondary">
+Explore Rooms
+</a>
 
-    </div>
+</div>
 
-    <div class="overlay"></div>
+</div>
 
-    <div class="hero-content">
+</section>
 
-      <h1>
-        Experience Luxury
-        & <span>Comfort</span>
-      </h1>
+<!-- ROOMS -->
 
-      <p>
-        Welcome to Eastern Route Hotel — a premium hospitality
-        destination in Kampala offering elegant accommodation,
-        exceptional service, and unforgettable guest experiences.
-      </p>
+<section id="rooms">
 
-      <div class="hero-buttons">
+<div class="title">
 
-        <a href="#rooms" class="btn primary">
-          Book A Room
-        </a>
+<h2>Luxury Accommodation</h2>
 
-        <a href="#services" class="btn secondary">
-          Explore Hotel
-        </a>
+<p>
+Experience comfort, elegance and premium hospitality.
+</p>
 
-      </div>
+</div>
 
-    </div>
+<div class="rooms">
 
-  </section>
+<div class="room">
 
-  <!-- BOOKING -->
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop">
 
-  <div class="booking-bar">
+<div class="room-content">
 
-    <input type="date">
+<h3>Deluxe Room</h3>
 
-    <input type="date">
+<p>
+Elegant room with modern comfort and WiFi.
+</p>
 
-    <select>
-      <option>1 Guest</option>
-      <option>2 Guests</option>
-      <option>Family Room</option>
-    </select>
+<div class="price">
+UGX 180,000 / Night
+</div>
 
-    <button>
-      Check Availability
-    </button>
+<div class="limited">
+Only 2 rooms remaining
+</div>
 
-  </div>
+</div>
 
-  <!-- ROOMS -->
+</div>
 
-  <section id="rooms">
+<div class="room">
 
-    <div class="title">
+<img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop">
 
-      <h2>Luxury Accommodation</h2>
+<div class="room-content">
 
-      <p>
-        Discover elegant rooms designed for relaxation,
-        comfort, and premium hospitality.
-      </p>
+<h3>Executive Suite</h3>
 
-    </div>
+<p>
+Spacious suite with premium luxury experience.
+</p>
 
-    <div class="rooms">
+<div class="price">
+UGX 320,000 / Night
+</div>
 
-      <div class="room">
+<div class="limited">
+High demand this weekend
+</div>
 
-        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop">
+</div>
 
-        <div class="room-content">
+</div>
 
-          <h3>Deluxe Room</h3>
+</div>
 
-          <p>
-            Elegant room with modern interiors,
-            smart TV, WiFi, and premium comfort.
-          </p>
+</section>
 
-          <div class="price">
-            UGX 180,000 / Night
-          </div>
+<!-- FEATURES -->
 
-        </div>
+<section id="services">
 
-      </div>
+<div class="title">
 
-      <div class="room">
+<h2>Premium Amenities</h2>
 
-        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop">
+<p>
+Designed to deliver memorable hospitality experiences.
+</p>
 
-        <div class="room-content">
+</div>
 
-          <h3>Executive Suite</h3>
+<div class="features">
 
-          <p>
-            Spacious executive suite offering luxury,
-            privacy, and exceptional relaxation.
-          </p>
+<div class="feature">
 
-          <div class="price">
-            UGX 320,000 / Night
-          </div>
+<h3>Luxury Rooms</h3>
 
-        </div>
+<p>
+Elegant accommodation designed for relaxation and comfort.
+</p>
 
-      </div>
+</div>
 
-      <div class="room">
+<div class="feature">
 
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop">
+<h3>Restaurant & Bar</h3>
 
-        <div class="room-content">
+<p>
+Enjoy local and international cuisine prepared professionally.
+</p>
 
-          <h3>Standard Room</h3>
+</div>
 
-          <p>
-            Comfortable and affordable accommodation
-            with premium hotel service.
-          </p>
+<div class="feature">
 
-          <div class="price">
-            UGX 120,000 / Night
-          </div>
+<h3>Free Wi-Fi</h3>
 
-        </div>
+<p>
+Fast and reliable internet access throughout the hotel.
+</p>
 
-      </div>
+</div>
 
-    </div>
+<div class="feature">
 
-  </section>
+<h3>24/7 Reception</h3>
 
-  <!-- FEATURES -->
+<p>
+Professional hospitality service available at all times.
+</p>
 
-  <section id="services">
+</div>
 
-    <div class="title">
+</div>
 
-      <h2>Premium Amenities</h2>
+</section>
 
-      <p>
-        Experience world-class hospitality and comfort
-        with our premium hotel services.
-      </p>
+<!-- BOOKING -->
 
-    </div>
+<section class="booking-section" id="booking">
 
-    <div class="features">
+<div class="title">
 
-      <div class="feature">
+<h2>Reserve Your Stay</h2>
 
-        <h3>Luxury Rooms</h3>
+<p>
+Book your room and experience premium hospitality.
+</p>
 
-        <p>
-          Elegant accommodation designed for comfort,
-          privacy, and relaxation.
-        </p>
+</div>
 
-      </div>
+<div class="booking-container">
 
-      <div class="feature">
+<div class="form-grid">
 
-        <h3>Restaurant & Bar</h3>
+<div>
+<label>Check In</label>
+<input type="date">
+</div>
 
-        <p>
-          Enjoy delicious local and international cuisine
-          prepared by expert chefs.
-        </p>
+<div>
+<label>Check Out</label>
+<input type="date">
+</div>
 
-      </div>
+<div>
+<label>Adults</label>
+<select>
+<option>1 Adult</option>
+<option>2 Adults</option>
+<option>Family</option>
+</select>
+</div>
 
-      <div class="feature">
+<div>
+<label>Room Type</label>
+<select id="roomType">
+<option>Deluxe Room</option>
+<option>Executive Suite</option>
+<option>Standard Room</option>
+</select>
+</div>
 
-        <h3>Free Wi-Fi</h3>
+</div>
 
-        <p>
-          Stay connected with fast internet access
-          available throughout the hotel.
-        </p>
+<div style="margin-top:20px;">
 
-      </div>
+<label>Special Requests</label>
 
-      <div class="feature">
+<textarea placeholder="Special requests..."></textarea>
 
-        <h3>24/7 Service</h3>
+</div>
 
-        <p>
-          Our professional staff are available anytime
-          to ensure a comfortable stay.
-        </p>
+<button class="booking-btn" onclick="generateSummary()">
+Check Availability
+</button>
 
-      </div>
+<div class="availability">
 
-    </div>
+<div class="room-status">
+Deluxe Room — Available
+</div>
 
-  </section>
+<div class="room-status">
+Executive Suite — Only 1 Room Left
+</div>
 
-  <!-- ABOUT -->
+<div class="room-status">
+Standard Room — High demand today
+</div>
 
-  <section id="about">
+</div>
 
-    <div class="about">
+<div class="summary">
 
-      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop">
+<h2>Booking Summary</h2>
 
-      <div class="about-content">
+<p id="roomSummary"></p>
+<p id="nightSummary"></p>
+<p id="totalSummary"></p>
 
-        <h2>About Eastern Route Hotel</h2>
+<a
+href="https://wa.me/256703534208?text=Hello%20Eastern%20Route%20Hotel,%20I%20would%20like%20to%20reserve%20a%20room"
+target="_blank"
+class="whatsapp-btn">
+Confirm via WhatsApp
+</a>
 
-        <p>
-          Located in Kireka, Kampala, Eastern Route Hotel
-          offers modern hospitality experiences with elegant
-          rooms, premium comfort, and exceptional customer service.
-        </p>
+</div>
 
-        <p>
-          Whether you are visiting for business,
-          relaxation, or leisure, we are committed to
-          providing memorable accommodation experiences.
-        </p>
+</div>
 
-      </div>
+</section>
 
-    </div>
+<!-- POPUP -->
 
-  </section>
+<div class="popup" id="popup">
 
-  <!-- TESTIMONIALS -->
+<h2>
+Reservation Request Submitted
+</h2>
 
-  <section>
+<p style="margin-top:15px;">
+Our hotel team will contact you shortly.
+</p>
 
-    <div class="title">
+</div>
 
-      <h2>Guest Reviews</h2>
+<!-- FOOTER -->
 
-      <p>
-        Hear what our guests say about their experiences.
-      </p>
+<footer>
 
-    </div>
+© 2026 Eastern Route Hotel. All Rights Reserved.
 
-    <div class="testimonials">
+</footer>
 
-      <div class="testimonial">
+<script>
 
-        <p>
-          “Excellent hospitality and peaceful environment.
-          I truly enjoyed my stay.”
-        </p>
+/* NAVBAR */
 
-        <h4>
-          — Guest Review
-        </h4>
+const navbar =
+document.getElementById('navbar');
 
-      </div>
+window.addEventListener('scroll',()=>{
 
-      <div class="testimonial">
+if(window.scrollY > 50){
 
-        <p>
-          “Beautiful rooms, professional staff,
-          and very comfortable accommodation.”
-        </p>
+navbar.classList.add('scrolled');
 
-        <h4>
-          — Happy Customer
-        </h4>
+}else{
 
-      </div>
+navbar.classList.remove('scrolled');
 
-      <div class="testimonial">
+}
 
-        <p>
-          “Amazing atmosphere and premium services.
-          Highly recommended.”
-        </p>
+});
 
-        <h4>
-          — Visitor
-        </h4>
+/* THEME */
 
-      </div>
+const themeToggle =
+document.getElementById('themeToggle');
 
-    </div>
+themeToggle.addEventListener('click',()=>{
 
-  </section>
+document.body.classList.toggle('light-mode');
 
-  <!-- CTA -->
+});
 
-  <section id="contact">
+/* SLIDER */
 
-    <div class="cta">
+const slides =
+document.querySelectorAll('.slide');
 
-      <h2>
-        Book Your Luxury Stay Today
-      </h2>
+let currentSlide = 0;
 
-      <p>
-        Enjoy elegant accommodation, exceptional hospitality,
-        and unforgettable comfort at Eastern Route Hotel.
-      </p>
+function changeSlide(){
 
-      <a href="#" class="btn primary">
-        Contact Hotel
-      </a>
+slides[currentSlide].classList.remove('active');
 
-    </div>
+currentSlide =
+(currentSlide + 1) % slides.length;
 
-  </section>
+slides[currentSlide].classList.add('active');
 
-  <!-- FOOTER -->
+}
 
-  <footer>
+setInterval(changeSlide,5000);
 
-    <div class="footer-container">
+/* BOOKING SUMMARY */
 
-      <div class="footer-column">
+function generateSummary(){
 
-        <h3>Eastern Route Hotel</h3>
+const room =
+document.getElementById('roomType').value;
 
-        <p>
-          Elegant hospitality and premium accommodation
-          in Kampala Uganda.
-        </p>
+const prices = {
 
-      </div>
+'Deluxe Room':180000,
+'Executive Suite':320000,
+'Standard Room':120000
 
-      <div class="footer-column">
+};
 
-        <h3>Contact</h3>
+const nights = 2;
 
-        <p>
-          📍 Kireka, Kampala Uganda
-        </p>
+const total = prices[room] * nights;
 
-        <p>
-          📞 +256 703 534208
-        </p>
+document.getElementById('roomSummary').innerText =
+'Room: ' + room;
 
-        <p>
-          ✉ info@easternroutehotel.com
-        </p>
+document.getElementById('nightSummary').innerText =
+'Nights: ' + nights;
 
-      </div>
+document.getElementById('totalSummary').innerText =
+'Estimated Total: UGX ' + total.toLocaleString();
 
-      <div class="footer-column">
+const popup =
+document.getElementById('popup');
 
-        <h3>Services</h3>
+popup.style.display = 'block';
 
-        <p>Luxury Rooms</p>
+setTimeout(()=>{
 
-        <p>Restaurant & Bar</p>
+popup.style.display = 'none';
 
-        <p>Room Service</p>
+},3000);
 
-        <p>Free Wi-Fi</p>
+}
 
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-
-      <p>
-        © 2026 Eastern Route Hotel. All Rights Reserved.
-      </p>
-
-    </div>
-
-  </footer>
-
-  <!-- JAVASCRIPT -->
-
-  <script>
-
-    const hamburger = document.getElementById('hamburger');
-
-    const navLinks = document.getElementById('navLinks');
-
-    const navbar = document.getElementById('navbar');
-
-    const themeToggle = document.getElementById('themeToggle');
-
-    hamburger.addEventListener('click', () => {
-
-      navLinks.classList.toggle('active');
-
-    });
-
-    window.addEventListener('scroll', () => {
-
-      if(window.scrollY > 50){
-
-        navbar.classList.add('scrolled');
-
-      } else {
-
-        navbar.classList.remove('scrolled');
-
-      }
-
-    });
-
-    /* THEME TOGGLE */
-
-    themeToggle.addEventListener('click', () => {
-
-      document.body.classList.toggle('light-mode');
-
-    });
-
-    /* HERO SLIDER */
-
-    const slides = document.querySelectorAll('.slide');
-
-    let currentSlide = 0;
-
-    function changeSlide(){
-
-      slides[currentSlide].classList.remove('active');
-
-      currentSlide = (currentSlide + 1) % slides.length;
-
-      slides[currentSlide].classList.add('active');
-
-    }
-
-    setInterval(changeSlide, 5000);
-
-  </script>
+</script>
 
 </body>
 </html>
